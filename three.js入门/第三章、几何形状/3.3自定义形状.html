@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../../three.js"></script>
+    <script type="text/javascript">
+        function init() {
+            var renderer = new THREE.WebGLRenderer({
+                canvas:document.getElementById("mainCanvas"),
+                antialias: true,
+                precision: "highp"
+            });
+            renderer.setClearColor(0x666666);
+            var camera = new THREE.PerspectiveCamera(30,4/3,1,100);
+//            var camera = new THREE.OrthographicCamera(-5, 5, 3.75, -3.75, 0.1, 100);
+//            camera.position.set(0,0,0);
+            camera.position.set(8,5,10);
+//            camera.position.set(25,25,25);
+            camera.lookAt(new THREE.Vector3(0,0,0));
+            var scene = new THREE.Scene();
+            scene.add(camera);
+            makeLight(scene);
+            var material = new THREE.MeshLambertMaterial({
+                color:0xf5f5f5
+            });
+            drawTorus(scene,material,{x:-1.3,y:-1,z:1.2});
+            drawTorus(scene,material,{x:1.2,y:-1,z:1.2});
+            drawCube(scene,material);
+
+            renderer.render(scene,camera);
+        }
+        /**
+         * 灯光
+         * @param scene
+         */
+        function makeLight(scene) {
+            var light = new THREE.PointLight(0xf1f1f1,2,100);
+            light.position.set(15,20,15);
+            scene.add(light);
+        }
+        /**
+         * 车体
+         * @param scene
+         * @param material
+         */
+        function drawCube(scene,material) {
+            var cube = new THREE.Mesh(new THREE.CubeGeometry(4,2,2.5),material);
+            scene.add(cube);
+        }
+        /**
+         * 车轱辘
+         * @param scene
+         * @param material
+         */
+        function drawTorus(scene,material,position) {
+            var torus = new THREE.Mesh(new THREE.TorusGeometry(0.4,0.18,10,100),material);
+            scene.add(torus);
+            torus.position.set(position.x,position.y,position.z);
+        }
+    </script>
+</head>
+<body onload="init()">
+<canvas id="mainCanvas" width="800px" height="600px"></canvas>
+</body>
+</html>

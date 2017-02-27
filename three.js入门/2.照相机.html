@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../three.js"></script>
+    <script type="text/javascript">
+        /**
+         * 照相机：
+         * 1.正交投影照相机  -> 制图、建模软件通常使用正交投影，不会因为投影改变物体比例
+         * 2.透视投影照相机 -> 人眼看到的，近大远小
+         */
+        /**
+         * 正交投影照相机（Orthographic Camera）
+         * THREE.OrthographicCamera(left,right,top,bottom,near,far)
+         * (right-left)与(top-bottom)的比例与Canvas宽高比一致
+         */
+//        function init(){
+//            var renderer = new THREE.WebGLRenderer();
+//            renderer.setClearColor(0x000000);
+//            renderer.setSize(400,300);
+//            document.getElementsByTagName("body")[0].appendChild(renderer.domElement);
+//            var scene = new THREE.Scene();
+//            var camera = new THREE.OrthographicCamera(-2,2,1.5,-1.5,1,10);
+//            camera.position.set(4,-3,5);
+//            camera.lookAt(new THREE.Vector3(0,0,0));
+//            scene.add(camera);
+//            var cube = new THREE.Mesh(new THREE.CubeGeometry(1,1,1),
+//                new THREE.MeshBasicMaterial({
+//                    color:0xff0000,
+//                    wireframe:true
+//                })
+//            );
+//            scene.add(cube);
+//            renderer.render(scene,camera);
+//        }
+        /**
+         * 透视投影照相机 (Perspective Camera)
+         * THREE.PerspectiveCamera(fov,aspect,near,far)
+         * fov->是视景体竖直方向的张角（角度制而非弧度制）
+         * aspect=width/height,是照相机水平方向和竖直方向长度的比值，通常是Canvas的横纵比例
+         * near、far最近、最远距离，均为正值
+         */
+        function init(){
+            var renderer = new THREE.WebGLRenderer();
+            renderer.setClearColor(0x000000);
+            renderer.setSize(400,300);
+            document.getElementsByTagName("body")[0].appendChild(renderer.domElement);
+            var scene = new THREE.Scene();
+            var camera = new THREE.PerspectiveCamera(60,400/300,1,10);
+            camera.position.set(0,0,5);
+            scene.add(camera);
+            var cube = new THREE.Mesh(new THREE.CubeGeometry(1,1,1),
+                new THREE.MeshBasicMaterial({
+                    color:0xff0000,
+                    wireframe:true
+                })
+            );
+            scene.add(cube);
+            renderer.render(scene,camera);
+        }
+    </script>
+</head>
+<body onload="init()">
+
+</body>
+</html>
