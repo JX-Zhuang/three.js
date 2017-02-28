@@ -14,8 +14,8 @@
             renderer.setClearColor(0x666666);
             var camera = new THREE.PerspectiveCamera(30,4/3,1,100);
 //            var camera = new THREE.OrthographicCamera(-5, 5, 3.75, -3.75, 0.1, 100);
-//            camera.position.set(0,0,0);
-            camera.position.set(8,5,10);
+//            camera.position.set(10,0,0);
+            camera.position.set(12,5,10);
 //            camera.position.set(25,25,25);
             camera.lookAt(new THREE.Vector3(0,0,0));
             var scene = new THREE.Scene();
@@ -26,6 +26,8 @@
             });
             drawTorus(scene,material,{x:-1.3,y:-1,z:1.2});
             drawTorus(scene,material,{x:1.2,y:-1,z:1.2});
+            drawTorus(scene,material,{x:-1.3,y:-1,z:-1.3});
+            drawTorus(scene,material,{x:1.2,y:-1,z:-1.3});
             drawCube(scene,material);
 
             renderer.render(scene,camera);
